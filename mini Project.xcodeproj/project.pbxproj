@@ -37,6 +37,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042E402F284FABFB0083BB31 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0494FFE6284F395200AE51AB /* AppDelegate.swift */,
+				0494FFE8284F395200AE51AB /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		042E4030284FAC110083BB31 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0494FFEF284F395500AE51AB /* Assets.xcassets */,
+				0494FFF1284F395500AE51AB /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		0494FFDA284F395200AE51AB = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +74,10 @@
 		0494FFE5284F395200AE51AB /* mini Project */ = {
 			isa = PBXGroup;
 			children = (
-				0494FFE6284F395200AE51AB /* AppDelegate.swift */,
-				0494FFE8284F395200AE51AB /* SceneDelegate.swift */,
+				042E402F284FABFB0083BB31 /* App */,
 				0494FFEA284F395200AE51AB /* ViewController.swift */,
 				0494FFEC284F395200AE51AB /* Main.storyboard */,
-				0494FFEF284F395500AE51AB /* Assets.xcassets */,
-				0494FFF1284F395500AE51AB /* LaunchScreen.storyboard */,
+				042E4030284FAC110083BB31 /* Resources */,
 				0494FFF4284F395500AE51AB /* Info.plist */,
 			);
 			path = "mini Project";
