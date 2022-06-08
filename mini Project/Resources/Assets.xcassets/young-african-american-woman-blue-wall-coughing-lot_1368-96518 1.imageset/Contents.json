@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "young-african-american-woman-blue-wall-coughing-lot_1368-96518 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "ic_log_activity_tile-60@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
