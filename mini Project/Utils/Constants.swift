@@ -30,20 +30,21 @@ class Constants {
 		static let log_symptoms = UIImage(named: "ic_log_symptoms_tile-83.5")
 		
 		static let home_notification = UIImage(named: "ic_main_notifiaction-76")
-		static let notification = UIImage(named: "ic_topbar_notification-83.5")
+		static let notification = UIImage(named: "ic_topbar_notification-40")
 		
-		static let back_button = UIImage(named: "ic_topbar_back-76")
+		static let back_button = UIImage(named: "ic_topbar_back-29")
 		static let forward_button = UIImage(named: "ic_view_all_posts-21")
 		
-		static let like_button = UIImage(named: "post_profile_avatar-60")
-		static let unlike_button = UIImage(named: "ic_like-76")
-		static let share_button = UIImage(named: "ic_share-76")
+		static let like_button = UIImage(named: "icons8-filled-heart-29")
+		static let unlike_button = UIImage(named: "ic_like-29")
+		static let share_button = UIImage(named: "ic_share-29")
 		
 		static let health_readings = UIImage(named: "ic_enter_reading_manually-60")
 		static let glucose_level_reading = UIImage(named: "ic_take_reading_with_dnurse-60")
 		static let blood_pressure_reading = UIImage(named: "0c_take_reading_with_jumper-83.5")
 		
 		static let background = UIImage(named: "young-african-american-woman-blue-wall-coughing-lot_1368-96518 1")
+		static let display_picture = UIImage(named: "post_profile_avatar-60")
 	}
 	
 	enum LogTitles {
@@ -71,15 +72,15 @@ Symptoms
 	}
 	
 	enum LogCollections {
-		static let titleTexts = [Images.health_readings, Images.glucose_level_reading, Images.blood_pressure_reading]
+		static let titleTexts = [LogTitles.health_readings, LogTitles.glucose_level_reading, LogTitles.blood_pressure_reading]
 		static let descriptionTexts = [LogDescriptions.health_readings, LogDescriptions.glucose_level_reading, LogDescriptions.blood_pressure_reading]
 		static let images = [Images.health_readings, Images.glucose_level_reading, Images.blood_pressure_reading]
 	}
 	
-	enum Identifier {
-		static let explore = "ExploreCollectionViewCell"
-		static let menu = "MenuCollectionViewCell"
-		static let card =  "CardCollectionViewCell"
+	enum Identifiers {
+		static let notificationCell = "NotificationTableViewCell"
+		static let healthNews = "HealthNewsCollectionViewCell"
+		static let LogHealthReadings =  "LogTableViewCell"
 	}
 	
 	enum Colors {

@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "icons8-filled-heart-48.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_topbar_notification-83.5@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
