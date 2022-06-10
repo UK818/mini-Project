@@ -9,9 +9,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
-	private var viewLayout: ViewLayouts!
+	private var viewLayout: LifeStyleViewLayouts!
 	
-	init(viewLayout: ViewLayouts) {
+	init(viewLayout: LifeStyleViewLayouts) {
 		self.viewLayout = viewLayout
 		super.init(nibName: nil, bundle: nil)
 	}

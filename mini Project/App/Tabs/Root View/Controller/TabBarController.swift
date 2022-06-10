@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	let viewLayout = ViewLayouts()
+	let viewLayout = LifeStyleViewLayouts()
  
 	override func viewDidLoad() {
 		super.viewDidLoad()

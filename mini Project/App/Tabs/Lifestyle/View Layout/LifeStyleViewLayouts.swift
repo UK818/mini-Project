@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ViewLayouts {
+class LifeStyleViewLayouts {
 	let greetingLabel: UILabel = {
 		let label = UILabel()
 		label.text = "Good Morning, Tinashe"
@@ -45,6 +45,27 @@ checked your blood sugar
 		view.axis = .horizontal
 		view.distribution = .fillEqually
 		return view
+	}()
+	
+	let buttonContainer: UIView = {
+		let view = UIView()
+		view.backgroundColor = Constants.Colors.purple_bg
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+	
+	let viewAllButton: UIButton = {
+		let button = UIButton()
+		button.backgroundColor = Constants.Colors.purple_bg
+		button.setTitle("View all posts ", for: .normal)
+		button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+		button.setTitleColor(Constants.Colors.purple, for: .normal)
+		button.contentMode = .scaleAspectFill
+		button.setImage(Constants.Images.forward_button, for: .normal)
+		button.semanticContentAttribute = UIApplication.shared
+			.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
 	}()
 		
 	func cardView(image: UIImage, title: String) -> UIView {
@@ -162,22 +183,8 @@ checked your blood sugar
 			return label
 		}()
 		
-		let viewAllButton: UIButton = {
-			let button = UIButton()
-			button.setTitle("View all posts ", for: .normal)
-			button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-			button.setTitleColor(Constants.Colors.purple, for: .normal)
-			button.contentMode = .scaleAspectFill
-			button.setImage(Constants.Images.forward_button, for: .normal)
-			button.semanticContentAttribute = UIApplication.shared
-				.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-			button.translatesAutoresizingMaskIntoConstraints = false
-			return button
-		}()
-		
 		mainContainer.addSubview(mainLabel)
 		mainContainer.addSubview(container)
-		mainContainer.addSubview(viewAllButton)
 		
 		container.addSubview(imageView)
 		container.addSubview(textBox)
@@ -196,13 +203,8 @@ checked your blood sugar
 			container.leadingAnchor.constraint(equalTo: mainLabel.leadingAnchor),
 			container.trailingAnchor.constraint(equalTo: mainLabel.trailingAnchor),
 			container.widthAnchor.constraint(equalTo: mainLabel.widthAnchor),
-			container.heightAnchor.constraint(equalTo: mainContainer.heightAnchor, multiplier: 0.75),
-			
-			viewAllButton.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 10),
-			viewAllButton.leadingAnchor.constraint(equalTo: mainLabel.leadingAnchor),
-			viewAllButton.bottomAnchor.constraint(equalTo: mainContainer.bottomAnchor, constant: -10),
-			viewAllButton.widthAnchor.constraint(equalToConstant: 110),
-			viewAllButton.heightAnchor.constraint(equalToConstant: 20),
+			container.heightAnchor.constraint(equalTo: mainContainer.heightAnchor, multiplier: 0.82),
+			container.bottomAnchor.constraint(equalTo: mainContainer.bottomAnchor),
 			
 			imageView.topAnchor.constraint(equalTo: container.topAnchor),
 			imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
@@ -233,4 +235,5 @@ checked your blood sugar
 		
 		return mainContainer
 	}
+
 }

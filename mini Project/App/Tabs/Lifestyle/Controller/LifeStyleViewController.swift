@@ -9,7 +9,7 @@ import UIKit
 
 class LifeStyleViewController: UIViewController {
 	
-	private var viewLayout: ViewLayouts!
+	private var viewLayout: LifeStyleViewLayouts!
 	
 	private var greetingLabel: UILabel!
 	private var introMessageLabel: UILabel!
@@ -20,8 +20,10 @@ class LifeStyleViewController: UIViewController {
 	private var logSymptomsView: UIView!
 	private var bottomSeparator: UIView!
 	private var healthNewsView: UIView!
+	private var buttonContainer: UIView!
+	private var viewAllButton: UIButton!
 	
-	init(viewLayout: ViewLayouts) {
+	init(viewLayout: LifeStyleViewLayouts) {
 		self.viewLayout = viewLayout
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -35,6 +37,10 @@ class LifeStyleViewController: UIViewController {
 		setupVC()
 		setupLayoutConstraints()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		hideNavigationBar()
+	}
   
 	func setupVC() {
 		greetingLabel = viewLayout.greetingLabel
@@ -46,6 +52,8 @@ class LifeStyleViewController: UIViewController {
 		logSymptomsView = viewLayout.cardView(image: Constants.Images.log_symptoms!, title: Constants.LogTitles.log_symptoms)
 		bottomSeparator = viewLayout.separatorView()
 		healthNewsView = viewLayout.healthNewsView()
+		buttonContainer = viewLayout.buttonContainer
+		viewAllButton = viewLayout.viewAllButton
 		
 		self.navigationController?.navigationBar.isHidden = true
 		
@@ -60,11 +68,46 @@ class LifeStyleViewController: UIViewController {
 		view.addSubview(logSymptomsView)
 		view.addSubview(bottomSeparator)
 		view.addSubview(healthNewsView)
+		view.addSubview(buttonContainer)
+		buttonContainer.addSubview(viewAllButton)
+		
+		let tap = UITapGestureRecognizer(target: self, action: #selector(navigateToLogVC))
+			view.addGestureRecognizer(tap)
+		
+		notificationButton.addTarget(self, action: #selector(navigateToNotifications), for: .touchUpInside)
+		viewAllButton.addTarget(self, action: #selector(navigateToHealthNews), for: .touchUpInside)
 	}
+	
+	@objc func navigateToNotifications() {
+		let notificationViewLayout = NotificationViewLayout()
+		let notificationVC = NotificationViewController(viewLayout: notificationViewLayout)
+		navigationController?.pushViewController(notificationVC, animated: true)
+	}
+	
+	@objc func navigateToHealthNews() {
+		let viewLayout = HealthNewsViewLayout()
+		let HealthNewsVC = HealthNewsViewController(viewLayout: viewLayout)
+		navigationController?.pushViewController(HealthNewsVC, animated: true)
+	}
+	
+	@objc func navigateToLogVC() {
+		let viewLayout = LogViewLayout()
+		let logVC = LogViewController(viewLayout: viewLayout)
+		navigationController?.pushViewController(logVC, animated: true)
+	}
+	
+	private func hideNavigationBar() {
+		self.navigationController?.navigationBar.isHidden = true
+	}
+
+}
+
+extension LifeStyleViewController {
 	
 	func setupLayoutConstraints() {
 		let logCardWidth = view.frame.width / 3.5
 		let logCardHeight = (view.frame.width / 3.5) + 10
+		
 		NSLayoutConstraint.activate([
 			greetingLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
 			greetingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
@@ -116,9 +159,20 @@ class LifeStyleViewController: UIViewController {
 			healthNewsView.leadingAnchor.constraint(equalTo: bottomSeparator.leadingAnchor),
 			healthNewsView.trailingAnchor.constraint(equalTo: bottomSeparator.trailingAnchor),
 			healthNewsView.widthAnchor.constraint(equalTo: bottomSeparator.widthAnchor),
-			healthNewsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33)
+			healthNewsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+			
+			buttonContainer.topAnchor.constraint(equalTo: healthNewsView.bottomAnchor),
+			buttonContainer.leadingAnchor.constraint(equalTo: healthNewsView.leadingAnchor),
+			buttonContainer.trailingAnchor.constraint(equalTo: healthNewsView.trailingAnchor),
+			buttonContainer.heightAnchor.constraint(equalToConstant: 40),
+			
+			viewAllButton.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 10),
+			viewAllButton.leadingAnchor.constraint(equalTo: healthNewsView.leadingAnchor, constant: 10),
+			viewAllButton.widthAnchor.constraint(equalToConstant: 110),
+			viewAllButton.heightAnchor.constraint(equalToConstant: 20),
+			viewAllButton.bottomAnchor.constraint(equalTo: buttonContainer.bottomAnchor, constant: -10)
 			
 		])
 	}
-
+	
 }
