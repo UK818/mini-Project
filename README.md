@@ -1,5 +1,16 @@
 # mini-Project
-Coding Assessment
+Coding Assessment 
+
+Architecture used: Model View Controller (MVC)
+reasons: I considered the type of task, data, number of screens and the app phases in making my decision.
+         The task majorly involved UI and didn't require a lot of data manipulation and network calls.
+
+- Used Programmatic style of designing UI
+- Setup dummy data that I consumed and used to populate NSViews such as CollectionView and TableViews
+- Used CollectionViews for the Health News screen
+- Used TableViews for both Notification screen and Log Health Readings screen
+- Adhered to SOLID principles and Apple guidelines
+- focused on app performance by using Xcode Instruments to check for memory leaks
 
 
 
