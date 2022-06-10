@@ -116,7 +116,7 @@ class DisplayNewsViewLayout {
 			label.text = data.newsTitle
 			label.numberOfLines = 2
 			label.lineBreakMode = .byWordWrapping
-			label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+			label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
 			label.translatesAutoresizingMaskIntoConstraints = false
 			return label
 		}()
@@ -126,7 +126,7 @@ class DisplayNewsViewLayout {
 			label.text = data.newsDescription
 			label.numberOfLines = 0
 			label.lineBreakMode = .byWordWrapping
-			label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+			label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
 			label.translatesAutoresizingMaskIntoConstraints = false
 			return label
 		}()
@@ -145,7 +145,7 @@ class DisplayNewsViewLayout {
 			newsImage.leadingAnchor.constraint(equalTo: container.leadingAnchor),
 			newsImage.trailingAnchor.constraint(equalTo: container.trailingAnchor),
 			newsImage.widthAnchor.constraint(equalTo: container.widthAnchor),
-			newsImage.heightAnchor.constraint(equalToConstant: 160),
+			newsImage.heightAnchor.constraint(equalToConstant: 240),
 			
 			displayPicture.topAnchor.constraint(equalTo: newsImage.bottomAnchor, constant: 17),
 			displayPicture.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 17),
@@ -154,7 +154,7 @@ class DisplayNewsViewLayout {
 			
 			nameLabel.topAnchor.constraint(equalTo: displayPicture.topAnchor),
 			nameLabel.leadingAnchor.constraint(equalTo: displayPicture.trailingAnchor, constant: 10),
-			nameLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+			nameLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -17),
 			nameLabel.heightAnchor.constraint(equalToConstant: 20),
 			
 			timeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
@@ -162,10 +162,10 @@ class DisplayNewsViewLayout {
 			timeLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
 			timeLabel.heightAnchor.constraint(equalToConstant: 20),
 			
-			textBox.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10),
+			textBox.topAnchor.constraint(equalTo: timeLabel.bottomAnchor),
 			textBox.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 10),
-			textBox.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -10),
-			textBox.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.4),
+			textBox.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
+//			textBox.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.4),
 			textBox.widthAnchor.constraint(equalToConstant: container.frame.width),
 			textBox.bottomAnchor.constraint(equalTo: container.bottomAnchor),
 			
@@ -174,15 +174,16 @@ class DisplayNewsViewLayout {
 			newsTitle.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: -10),
 			newsTitle.heightAnchor.constraint(equalToConstant: 49),
 			
-			newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 5),
+			newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor),
 			newsDescription.leadingAnchor.constraint(equalTo: newsTitle.leadingAnchor),
 			newsDescription.trailingAnchor.constraint(equalTo: newsTitle.trailingAnchor),
-			newsDescription.bottomAnchor.constraint(equalTo: textBox.bottomAnchor, constant: -10)
+			newsDescription.bottomAnchor.constraint(equalTo: textBox.bottomAnchor)
 		])
 		
 		if data.mainImage != Constants.Images.background {
 			newsImage.isHidden = true
 			displayPicture.topAnchor.constraint(equalTo: container.topAnchor, constant: 10).isActive = true
+			textBox.topAnchor.constraint(equalTo: container.topAnchor, constant: 50).isActive = true
 		} else {
 			newsImage.isHidden = false
 			displayPicture.topAnchor.constraint(equalTo: newsImage.bottomAnchor, constant: 10).isActive = true

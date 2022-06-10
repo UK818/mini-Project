@@ -46,7 +46,7 @@ class DisplayNewsViewController: UIViewController {
 		self.notificationButton.target = self
 		self.notificationButton.action = #selector(navigateToNotifications)
 		
-		self.view.backgroundColor = .systemTeal
+		self.view.backgroundColor = .white
 		
 		self.navigationItem.title = "Health News"
 		self.navigationItem.rightBarButtonItem = notificationButton
@@ -72,7 +72,6 @@ class DisplayNewsViewController: UIViewController {
 			container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			container.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			container.widthAnchor.constraint(equalToConstant: view.frame.width),
-			container.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
 			
 			buttonContainer.topAnchor.constraint(equalTo: container.bottomAnchor),
 			buttonContainer.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 17),
@@ -103,6 +102,17 @@ class DisplayNewsViewController: UIViewController {
 	public func populateVC(with news: NewsModel) {
 		self.container = viewLayout.containerView(populateWith: news)
 		setUpLayoutConstraints()
+		resizeContainer(news: news)
+	}
+	
+	private func resizeContainer(news: NewsModel) {
+		var height = 0.0
+		if news.mainImage != Constants.Images.background {
+			height = self.view.frame.height * 0.2
+		} else {
+			height = self.view.frame.height * 0.58
+		}
+		container.heightAnchor.constraint(equalToConstant: height).isActive = true
 	}
 	
 	@objc func toggleLikeButton() {

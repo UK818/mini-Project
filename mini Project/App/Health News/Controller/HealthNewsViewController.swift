@@ -84,7 +84,7 @@ class HealthNewsViewController: UIViewController {
 			displayPicture: Constants.Images.display_picture,
 			mainImage: UIImage(),
 			newsTitle: "How else can I help stop the spread of the coronavirus?",
-			newsDescription: "Use proper sneezing and coughing etiquette: Cover your mouth and nose...  Read More",
+			newsDescription: "Use proper sneezing and coughing etiquette: Cover your mouth and nose.\n Use proper sneezing and coughing etiquette: Cover your mouth and nose.",
 			isLiked: false)
 		
 		healthNewsCollection.append(news1)
@@ -136,9 +136,9 @@ extension HealthNewsViewController: UICollectionViewDelegateFlowLayout {
 		let width = self.collectionView.frame.width - 34
 		
 		if healthNewsCollection[indexPath.row].mainImage != Constants.Images.background {
-			height = self.collectionView.frame.height * 0.27
+			height = self.collectionView.frame.height * 0.25
 		} else {
-			height = self.collectionView.frame.height * 0.52
+			height = self.collectionView.frame.height * 0.53
 		}
 		
 		return CGSize(width: width , height: height)

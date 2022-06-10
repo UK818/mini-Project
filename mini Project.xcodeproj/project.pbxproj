@@ -78,11 +78,11 @@
 			children = (
 				0494FFE6284F395200AE51AB /* AppDelegate.swift */,
 				0494FFE8284F395200AE51AB /* SceneDelegate.swift */,
-				048F29D1285364300080AE72 /* Log Health Readings */,
-				048F29CA28534DBD0080AE72 /* Display Health News */,
-				048F29C128523AA60080AE72 /* Health News */,
 				048F29BF28523A6D0080AE72 /* Tabs */,
 				048F29C028523A900080AE72 /* Notification */,
+				048F29C128523AA60080AE72 /* Health News */,
+				048F29CA28534DBD0080AE72 /* Display Health News */,
+				048F29D1285364300080AE72 /* Log Health Readings */,
 			);
 			path = App;
 			sourceTree = "<group>";

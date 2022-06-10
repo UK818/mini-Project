@@ -43,12 +43,12 @@ class HealthNewsViewLayout {
 		configuration.image = Constants.Images.unlike_button
 		configuration.baseBackgroundColor = Constants.Colors.ash2
 		configuration.baseForegroundColor = .black
-		configuration.titlePadding = 10
-		configuration.imagePadding = 10
-		configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+		configuration.titlePadding = 15
+		configuration.imagePadding = 15
+		configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 25, bottom: 15, trailing: 25)
 		
 		let button = UIButton(configuration: configuration)
-		button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+		button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
@@ -62,21 +62,39 @@ class HealthNewsViewLayout {
 	
 	let shareButton: UIButton = {
 		var configuration = UIButton.Configuration.filled()
-		configuration.title = "share"
+		configuration.title = "Share"
 		configuration.image = Constants.Images.share_button
 		configuration.baseBackgroundColor = Constants.Colors.ash2
 		configuration.baseForegroundColor = .black
-		configuration.titlePadding = 10
-		configuration.imagePadding = 10
-		configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+		configuration.titlePadding = 15
+		configuration.imagePadding = 15
+		configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 25, bottom: 15, trailing: 25)
 		
 		let button = UIButton(configuration: configuration)
-		button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+		button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
 	
+	func concatenateAttrTexts(left: NSAttributedString, right: NSAttributedString) -> NSAttributedString {
+		let result = NSMutableAttributedString()
+		result.append(left)
+		result.append(right)
+		return result
+	}
+	
 	func containerView(populateWith data: NewsModel) -> UIView {
+		
+		let text = data.newsDescription
+		let extendedString = "Read More"
+		let attribute = [ NSAttributedString.Key.foregroundColor: Constants.Colors.active ]
+		let attrStringExtension = NSAttributedString(string: extendedString, attributes: attribute as [NSAttributedString.Key : Any])
+		
+		var textString = text.prefix(60)
+		textString += "... "
+		let attrDescriptionString = NSAttributedString(string: String(textString))
+		
+		let finalDescription = concatenateAttrTexts(left: attrDescriptionString, right: attrStringExtension)
 		
 		let container: UIView = {
 			let view = UIView()
@@ -106,7 +124,7 @@ class HealthNewsViewLayout {
 			label.text = data.timePosted
 			label.textAlignment = .left
 			label.textColor = UIColor(white: 0.4, alpha: 1)
-			label.font = UIFont.systemFont(ofSize: 13.5, weight: .regular)
+			label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
 			label.translatesAutoresizingMaskIntoConstraints = false
 			return label
 		}()
@@ -130,17 +148,17 @@ class HealthNewsViewLayout {
 			label.text = data.newsTitle
 			label.numberOfLines = 2
 			label.lineBreakMode = .byWordWrapping
-			label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+			label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
 			label.translatesAutoresizingMaskIntoConstraints = false
 			return label
 		}()
 		
 		let newsDescription: UILabel = {
 			let label = UILabel()
-			label.text = data.newsDescription
+			label.attributedText = finalDescription
 			label.numberOfLines = 2
 			label.lineBreakMode = .byWordWrapping
-			label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+			label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
 			label.translatesAutoresizingMaskIntoConstraints = false
 			return label
 		}()
@@ -184,11 +202,11 @@ class HealthNewsViewLayout {
 			textBox.bottomAnchor.constraint(equalTo: container.bottomAnchor),
 			
 			newsTitle.topAnchor.constraint(equalTo: textBox.topAnchor),
-			newsTitle.leadingAnchor.constraint(equalTo: textBox.leadingAnchor, constant: 10),
-			newsTitle.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: -10),
+			newsTitle.leadingAnchor.constraint(equalTo: textBox.leadingAnchor, constant: 17),
+			newsTitle.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: -17),
 			newsTitle.heightAnchor.constraint(equalToConstant: 49),
 			
-			newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 5),
+			newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor),
 			newsDescription.leadingAnchor.constraint(equalTo: newsTitle.leadingAnchor),
 			newsDescription.trailingAnchor.constraint(equalTo: newsTitle.trailingAnchor),
 			newsDescription.heightAnchor.constraint(equalToConstant: 36),
@@ -197,7 +215,7 @@ class HealthNewsViewLayout {
 		
 		if data.mainImage != Constants.Images.background {
 			newsImage.isHidden = true
-			textBox.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20).isActive = true
+			textBox.topAnchor.constraint(equalTo: timeLabel.bottomAnchor).isActive = true
 		} else {
 			newsImage.isHidden = false
 			textBox.topAnchor.constraint(equalTo: newsImage.bottomAnchor, constant: 10).isActive = true

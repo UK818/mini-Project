@@ -90,7 +90,6 @@ class HealthNewsCollectionViewCell: UICollectionViewCell {
 	}
 	
 	@objc func toggleLikeButton() {
-		print(index)
 	
 		let healthNewsVC = HealthNewsViewController(viewLayout: HealthNewsViewLayout())
 		print(healthNewsVC.healthNewsCollection.count)
