@@ -14,7 +14,7 @@ class HealthNewsViewController: UIViewController {
 	private var notificationButton: UIBarButtonItem!
 	
 	public var healthNewsCollection: [NewsModel] = [NewsModel]()
-	
+
 	init(viewLayout: HealthNewsViewLayout) {
 		super.init(nibName: nil, bundle: nil)
 		self.viewLayout = viewLayout
@@ -31,6 +31,7 @@ class HealthNewsViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		self.navigationItem.title = "Health News"
+		self.collectionView.reloadData()
 	}
 
 	private func setupVC() {
@@ -112,7 +113,7 @@ extension HealthNewsViewController: UICollectionViewDataSource {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HealthNewsCollectionViewCell.identifier, for: indexPath) as? HealthNewsCollectionViewCell else {
 			return UICollectionViewCell()
 		}
-		cell.populateCell(with: healthNewsCollection[indexPath.row], index: indexPath.row)
+		cell.populateCell(with: healthNewsCollection[indexPath.row], index: indexPath.row, data: healthNewsCollection)
 		return cell
 	}
 	
@@ -123,7 +124,7 @@ extension HealthNewsViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let viewLayout = DisplayNewsViewLayout()
 		let displayVC = DisplayNewsViewController(viewLayout: viewLayout)
-		displayVC.populateVC(with: healthNewsCollection[indexPath.row])
+		displayVC.populateVC(with: healthNewsCollection[indexPath.row], index: indexPath.row)
 		navigationController?.pushViewController(displayVC, animated: true)
 	}
 	
@@ -134,12 +135,9 @@ extension HealthNewsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		var height = 0.0
 		let width = self.collectionView.frame.width - 34
-		
-		if healthNewsCollection[indexPath.row].mainImage != Constants.Images.background {
-			height = self.collectionView.frame.height * 0.25
-		} else {
-			height = self.collectionView.frame.height * 0.53
-		}
+		healthNewsCollection[indexPath.row].mainImage != Constants.Images.background ?
+		(height = self.collectionView.frame.height * 0.25) :
+		(height = self.collectionView.frame.height * 0.53)
 		
 		return CGSize(width: width , height: height)
 	}

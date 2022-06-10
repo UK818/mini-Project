@@ -18,6 +18,8 @@ class HealthNewsCollectionViewCell: UICollectionViewCell {
 	private var shareButton: UIButton!
 	private var divider: UIView!
 	
+	private var news: NewsModel!
+	private var data: [NewsModel]!
 	private var index = 0
 	
 	override init(frame: CGRect) {
@@ -83,22 +85,21 @@ class HealthNewsCollectionViewCell: UICollectionViewCell {
 		])
 	}
 	
-	public func populateCell(with news: NewsModel, index: Int){
+	public func populateCell(with news: NewsModel, index: Int, data: [NewsModel]) {
+		self.data = data
+		self.news = news
 		container = viewLayout?.containerView(populateWith: news)
 		setupLayoutConstraints()
 		self.index = index
 	}
 	
 	@objc func toggleLikeButton() {
+		updateLikeButtonImage()
+	}
 	
-		let healthNewsVC = HealthNewsViewController(viewLayout: HealthNewsViewLayout())
-		print(healthNewsVC.healthNewsCollection.count)
-		if healthNewsVC.healthNewsCollection[self.index].isLiked == true {
-			likeButton.setImage(Constants.Images.unlike_button, for: .normal)
-			healthNewsVC.healthNewsCollection[self.index].isLiked = false
-		} else {
-			likeButton.setImage(Constants.Images.like_button, for: .normal)
-			healthNewsVC.healthNewsCollection[self.index].isLiked = true
-		}
+	private func updateLikeButtonImage() {
+		likeButton.setImage(news.isLiked ? (Constants.Images.unlike_button) : (Constants.Images.like_button), for: .normal)
+		news.isLiked ? (news.isLiked = false) : (news.isLiked = true)
+		self.contentView.layoutIfNeeded()
 	}
 }

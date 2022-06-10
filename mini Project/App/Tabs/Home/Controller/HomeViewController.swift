@@ -11,6 +11,13 @@ class HomeViewController: UIViewController {
 	
 	private var viewLayout: LifeStyleViewLayouts!
 	
+	let label: UILabel = {
+		let label = UILabel()
+		label.text = "Home Under construction"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
 	init(viewLayout: LifeStyleViewLayouts) {
 		self.viewLayout = viewLayout
 		super.init(nibName: nil, bundle: nil)
@@ -23,18 +30,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+		view.backgroundColor = .white
+		view.addSubview(label)
+		label.center = view.center
+		label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

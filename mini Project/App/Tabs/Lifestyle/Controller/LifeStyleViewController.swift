@@ -71,8 +71,13 @@ class LifeStyleViewController: UIViewController {
 		view.addSubview(buttonContainer)
 		buttonContainer.addSubview(viewAllButton)
 		
-		let tap = UITapGestureRecognizer(target: self, action: #selector(navigateToLogVC))
-			view.addGestureRecognizer(tap)
+		let tapLogReadingsView = UITapGestureRecognizer(target: self, action: #selector(navigateToLogVC))
+		let tapLogActivityView = UITapGestureRecognizer(target: self, action: #selector(navigateToLogVC))
+		let tapLogSymptomsView = UITapGestureRecognizer(target: self, action: #selector(navigateToLogVC))
+		
+		logReadingsView.addGestureRecognizer(tapLogReadingsView)
+		logActivityView.addGestureRecognizer(tapLogActivityView)
+		logSymptomsView.addGestureRecognizer(tapLogSymptomsView)
 		
 		notificationButton.addTarget(self, action: #selector(navigateToNotifications), for: .touchUpInside)
 		viewAllButton.addTarget(self, action: #selector(navigateToHealthNews), for: .touchUpInside)

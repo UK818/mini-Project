@@ -18,6 +18,9 @@ class DisplayNewsViewController: UIViewController {
 	private var shareButton: UIButton!
 	private var divider: UIView!
 	
+	private var index: Int!
+	private var news: NewsModel!
+	
 	init(viewLayout: DisplayNewsViewLayout) {
 		super.init(nibName: nil, bundle: nil)
 		self.viewLayout = viewLayout
@@ -50,11 +53,8 @@ class DisplayNewsViewController: UIViewController {
 		
 		self.navigationItem.title = "Health News"
 		self.navigationItem.rightBarButtonItem = notificationButton
-		
-		self.navigationController?.navigationBar.backIndicatorImage = Constants.Images.back_button
-		self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = Constants.Images.back_button
 		self.navigationController?.navigationBar.topItem?.title = ""
-		self.navigationController?.navigationBar.tintColor = .black
+		self.navigationItem.backButtonTitle = ""
 		
 		self.likeButton.addTarget(self, action: #selector(toggleLikeButton), for: .touchUpInside)
 	}
@@ -99,24 +99,27 @@ class DisplayNewsViewController: UIViewController {
 		])
 	}
 	
-	public func populateVC(with news: NewsModel) {
+	public func populateVC(with news: NewsModel, index: Int) {
+		self.news = news
 		self.container = viewLayout.containerView(populateWith: news)
 		setUpLayoutConstraints()
 		resizeContainer(news: news)
+		self.index = index
 	}
 	
 	private func resizeContainer(news: NewsModel) {
 		var height = 0.0
-		if news.mainImage != Constants.Images.background {
-			height = self.view.frame.height * 0.2
-		} else {
-			height = self.view.frame.height * 0.58
-		}
+		news.mainImage != Constants.Images.background ? (height = self.view.frame.height * 0.2) : (height = self.view.frame.height * 0.58)
 		container.heightAnchor.constraint(equalToConstant: height).isActive = true
 	}
 	
 	@objc func toggleLikeButton() {
-		likeButton.setImage(likeButton.isSelected ? Constants.Images.unlike_button : Constants.Images.like_button, for: .normal)
+		updateLikeButtonImage()
+	}
+	
+	private func updateLikeButtonImage() {
+		likeButton.setImage(news.isLiked ? (Constants.Images.like_button) : (Constants.Images.unlike_button), for: .normal)
+		news.isLiked ? (news.isLiked = false) : (news.isLiked = true)
 	}
 	
 	@objc func navigateToNotifications() {
